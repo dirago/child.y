@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ['child','behavior', 'responsabilities'],
+  "author": "Raphaël DI RAGO",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.16.0",
