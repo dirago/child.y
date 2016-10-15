@@ -3,3 +3,52 @@
 @import 'font-awesome-4.6.3/css/font-awesome.min.css'
 @import 'fonts/Melbourne/style.css'
 @import 'normalize.css'
+// Colors used in app
+$ocre: #E76F51
+$ocreClair: #F4A261
+$moutarde: #E9C46A
+$turquoise: #2A9D8F
+$indigo: #264653
+// assignment colors
+$body: $ocreClair
+$header: $ocre
+$a: white
+
+body
+    background-color: $body
+    width: 100vw
+    height: 100vh
+    font-family: 'Melbourne', 'Helvetica', sans-serif
+
+header
+    width: 100vw
+    height: 100px
+    background-color: $header
+    box-shadow: 0 0 10px $header
+    color: $moutarde
+    display: flex
+    flex-direction: row
+    align-items: center
+    justify-content: center
+    position: relative
+
+    #logo
+        fill: white
+
+    .log-panel
+        display: flex
+        flex-direction: column
+        align-self: flex-end
+        position: absolute
+        right: 40px
+        top: 50%
+        transform: translateY(-50%)
+
+        .log-panel--item
+            margin: 5px 0
+            text-align: center
+            color: $a
+            text-decoration: none
+
+        &:hover
+            @include prefix(filter, drop-shadow(0 0 2px white))
