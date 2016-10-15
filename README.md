@@ -7,4 +7,4 @@ My first real personal project, a web app built by :
 - PHP
 - MySQL
 
-## Project started on October 15, 2016
+# Project started on October 15, 2016
