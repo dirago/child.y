@@ -12,4 +12,4 @@
 ##Log
 ###October 15, 2016
 >Starting an app from scratch is so exciting to me, i will be able to check my abilities along this journey!
-The spec and the mockup is complete, today will be a design day :-)
+The spec and the mockup are complete, today will be a design day :-)
