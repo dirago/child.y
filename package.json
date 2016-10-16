@@ -1,12 +1,10 @@
 {
-  "name": "Childy",
+  "name": "childy",
   "version": "1.0.0",
-  "description": "",
-  "main": "js/script.js",
+  "description": "web app to manage childs behavior",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel js/custom --watch --out-file js/script-compiled.js"
   },
-  "keywords": ['child','behavior', 'responsabilities'],
   "author": "Raphaël DI RAGO",
   "license": "ISC",
   "devDependencies": {
