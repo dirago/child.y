@@ -3,7 +3,6 @@
 @import 'font-awesome-4.6.3/css/font-awesome.min.css'
 @import 'fonts/Melbourne/style.css'
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Work+Sans')
-// reset
 @import 'normalize'
 @import 'mixin'
 // Import of colors variables
@@ -15,32 +14,6 @@ $headerHeight: 100px
 
 .hidden
     display: none
-
-// Smileys
-.svg
-    fill: $C7
-    stroke: $C7
-    width: 50px
-    cursor: crosshair
-    margin: 0 5px
-.svg-good--colored
-    fill: $green
-    stroke: $green
-.svg-good
-    &:hover
-        @extend .svg-good--colored
-.svg-average--colored
-    fill: $yellow
-    stroke: $yellow
-.svg-average
-    &:hover
-        @extend .svg-average--colored
-.svg-bad--colored
-    fill: $red
-    stroke: $red
-.svg-bad
-    &:hover
-        @extend .svg-bad--colored
 
 body
     background-color: $body
@@ -100,13 +73,13 @@ main
 
     .demo-wrapper
         width: 80vw
-        height: 600px
         background-color: lighten($C5, 4%)
         box-shadow: 0 0 10px lighten($C5, 4%)
-        padding: 30px
+        padding: 60px
         display: flex
         flex-direction: column
         align-items: center
+        box-sizing: border-box
 
         .responsability-row
             display: flex
@@ -114,10 +87,36 @@ main
             align-items: center
             justify-content: space-around
             width: 100%
-            margin-bottom: 20px
+            margin-bottom: 30px
 
-            .responsability-text
-                font-size: 2em
-                color: $C7
+        .responsability-text
+            font-size: 3em
+            color: $C7
+            flex: 1
+            text-align: center
 
-            .responsability-smile
+        .responsability-smile
+            .svg
+                fill: $C7
+                stroke: $C7
+                width: 80px
+                cursor: crosshair
+                margin: 0 5px
+            .svg-good--colored
+                fill: $green
+                stroke: $green
+            .svg-good
+                &:hover
+                    @extend .svg-good--colored
+            .svg-average--colored
+                fill: $yellow
+                stroke: $yellow
+            .svg-average
+                &:hover
+                    @extend .svg-average--colored
+            .svg-bad--colored
+                fill: $red
+                stroke: $red
+            .svg-bad
+                &:hover
+                    @extend .svg-bad--colored

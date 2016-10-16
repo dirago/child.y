@@ -3494,29 +3494,6 @@ template {
 	display: none;
 }
 
-.svg {
-	fill: #fbe3e2;
-	stroke: #fbe3e2;
-	width: 50px;
-	cursor: crosshair;
-	margin: 0 5px;
-}
-
-.svg-good--colored, .svg-good:hover {
-	fill: #4faf4f;
-	stroke: #4faf4f;
-}
-
-.svg-average--colored, .svg-average:hover {
-	fill: #ffe800;
-	stroke: #ffe800;
-}
-
-.svg-bad--colored, .svg-bad:hover {
-	fill: #F00;
-	stroke: #F00;
-}
-
 body {
 	background-color: #f7b4b0;
 	width: 100vw;
@@ -3582,13 +3559,13 @@ main .subtitle {
 
 main .demo-wrapper {
 	width: 80vw;
-	height: 600px;
 	background-color: #fea6a0;
 	box-shadow: 0 0 10px #fea6a0;
-	padding: 30px;
+	padding: 60px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	box-sizing: border-box;
 }
 
 main .demo-wrapper .responsability-row {
@@ -3597,10 +3574,35 @@ main .demo-wrapper .responsability-row {
 	align-items: center;
 	justify-content: space-around;
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 }
 
-main .demo-wrapper .responsability-row .responsability-text {
-	font-size: 2em;
+main .demo-wrapper .responsability-text {
+	font-size: 3em;
 	color: #fbe3e2;
+	flex: 1;
+	text-align: center;
+}
+
+main .demo-wrapper .responsability-smile .svg {
+	fill: #fbe3e2;
+	stroke: #fbe3e2;
+	width: 80px;
+	cursor: crosshair;
+	margin: 0 5px;
+}
+
+main .demo-wrapper .responsability-smile .svg-good--colored, main .demo-wrapper .responsability-smile .svg-good:hover {
+	fill: #4faf4f;
+	stroke: #4faf4f;
+}
+
+main .demo-wrapper .responsability-smile .svg-average--colored, main .demo-wrapper .responsability-smile .svg-average:hover {
+	fill: #ffe800;
+	stroke: #ffe800;
+}
+
+main .demo-wrapper .responsability-smile .svg-bad--colored, main .demo-wrapper .responsability-smile .svg-bad:hover {
+	fill: #F00;
+	stroke: #F00;
 }

@@ -4,7 +4,15 @@
 var smileyRows = Array.from(document.getElementsByClassName('responsability-smile')),
     j = 0;
 // i create ids for each generated line of smiles
-smileyRows.map(i => {if (i.id != null){j++; return i.id = "a" + j;} else {j = 1; i.id = "a" + j}});
+smileyRows.map(i => {
+    if (i.id != null){
+        j++;
+        return i.id = "a" + j;
+    } else {
+        j = 1;
+        i.id = "a" + j
+    }
+});
 smileyRows.map(i => {
     let svgs = Array.from(document.querySelectorAll('#' + i.id + ' > svg'));
     svgs.map(function(i){
