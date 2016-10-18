@@ -15,6 +15,7 @@
         enfant grâce à une plateforme simple et ludique mais avant tout pédagogique">
         <title>Child.y | Assistant parental</title>
         <link rel="stylesheet" href="css/style.min.css">
+        <script src="https://use.fontawesome.com/982a8f46ca.js"></script>
     </head>
     <body>
         <?php include 'header.php'; ?>
