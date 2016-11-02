@@ -1,5 +1,3 @@
-'use strict';
-
 // I want to isolate each line of smileys so will be independent
 var smileyRows = Array.from(document.getElementsByClassName('responsability-smile')),
     j = 0;
@@ -15,7 +13,7 @@ smileyRows.map(i => {
 });
 smileyRows.map(i => {
     let svgs = Array.from(document.querySelectorAll('#' + i.id + ' > svg'));
-    svgs.map(function(i){
+    svgs.map(i => {
         i.addEventListener('click', function(e){
             svgs.map(function(i){
                 i.classList.remove(i.getAttribute('data-state'));

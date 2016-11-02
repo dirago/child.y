@@ -1,5 +1,4 @@
-@import 'animate'
-@import 'mixin'
+// @import 'animate'
 @import 'fonts/Melbourne/style.css'
 @import url('https://fonts.googleapis.com/css?family=Pacifico|Work+Sans')
 @import 'normalize'
@@ -34,6 +33,14 @@ header
     justify-content: center
     position: relative
 
+    .logged
+        color: white
+        position: absolute
+        right: 10px
+        top: 50%
+        transform: translateY(-50%)
+        .parent-color
+            color: $parent
     .log-panel
         display: flex
         flex-direction: column
@@ -51,14 +58,14 @@ header
         text-align: center
         color: $a
         text-decoration: none
-        border-bottom: 1px solid $C6
-        border-left: 1px solid $C6
+        border-bottom: 1px solid $body
+        border-left: 1px solid $body
         box-sizing: border-box
         background-color: transparent
         transition: all 1s ease
 
         &:hover
-            background-color: $C6
+            background-color: $body
 
 main
     display: flex
@@ -72,8 +79,8 @@ main
 
     .demo-wrapper
         width: 80vw
-        background-color: lighten($C5, 4%)
-        box-shadow: 0 0 10px lighten($C5, 4%)
+        background-color: lighten($header, 4%)
+        box-shadow: 0 0 10px lighten($header, 4%)
         padding: 60px
         display: flex
         flex-direction: column
@@ -90,14 +97,14 @@ main
 
         .responsability-text
             font-size: 3em
-            color: $C7
+            color: $a
             flex: 1
             text-align: center
 
         .responsability-smile
             .svg
-                fill: $C7
-                stroke: $C7
+                fill: $a
+                stroke: $a
                 width: 80px
                 cursor: crosshair
                 margin: 0 5px
