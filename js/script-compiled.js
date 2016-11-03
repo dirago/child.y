@@ -20,22 +20,33 @@ window.onload = function () {
             svg.addEventListener('click', function (evt) {
                 svgs.map(function (svg) {
                     svg.classList.remove(svg.getAttribute('data-color'));
-                    // svg.setAttribute('data-selected') = false;
-                    console.log(svg);
+                    svg.setAttribute('data-selected', '');
                 });
                 var item = evt.currentTarget.getAttribute('data-item');
                 var note = evt.currentTarget.getAttribute('data-note');
                 console.log('item selectionné :', item);
                 console.log('notation :', note);
                 evt.currentTarget.classList.add(evt.currentTarget.getAttribute('data-color'));
-                evt.target.dataset.selected = "true";
+                evt.currentTarget.setAttribute('data-selected', true);
+                afficheNotes();
             });
         });
     });
-    var afficheNotes = function afficheNotes() {
-        var arr = [];
+    function afficheNotes() {
+        var svgs = rows.map(function (row) {
+            return Array.from(document.querySelectorAll('#' + row.id + ' > svg'));
+        });
+        svgs.map(function (svg) {
+            var filter = svg.filter(onlySelected);
+            console.log(filter);
+            filter.map(function (el) {
+                console.log("L'item " + el.getAttribute('data-item'), "va avec la note " + el.getAttribute('data-note'));
+            });
+        });
+    };
 
-        arr.push();
+    function onlySelected(elt) {
+        return elt.getAttribute('data-selected') === "true";
     };
 };
 'use strict';
