@@ -541,7 +541,7 @@ main .demo-wrapper {
     box-sizing: border-box;
 }
 
-main .demo-wrapper .responsability-row {
+main .responsability-row {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -550,14 +550,14 @@ main .demo-wrapper .responsability-row {
     margin-bottom: 30px;
 }
 
-main .demo-wrapper .responsability-text {
+main .responsability-text {
     font-size: 3em;
     color: #fbe3e2;
     flex: 1;
     text-align: center;
 }
 
-main .demo-wrapper .responsability-smile .svg {
+main .responsability-smile .svg {
     fill: #fbe3e2;
     stroke: #fbe3e2;
     width: 80px;
@@ -565,17 +565,17 @@ main .demo-wrapper .responsability-smile .svg {
     margin: 0 5px;
 }
 
-main .demo-wrapper .responsability-smile .svg-good--colored, main .demo-wrapper .responsability-smile .svg-good:hover {
+main .responsability-smile .svg-good--colored, main .responsability-smile .svg-good:hover {
     fill: #4faf4f;
     stroke: #4faf4f;
 }
 
-main .demo-wrapper .responsability-smile .svg-average--colored, main .demo-wrapper .responsability-smile .svg-average:hover {
+main .responsability-smile .svg-average--colored, main .responsability-smile .svg-average:hover {
     fill: #ffe800;
     stroke: #ffe800;
 }
 
-main .demo-wrapper .responsability-smile .svg-bad--colored, main .demo-wrapper .responsability-smile .svg-bad:hover {
+main .responsability-smile .svg-bad--colored, main .responsability-smile .svg-bad:hover {
     fill: #F00;
     stroke: #F00;
 }

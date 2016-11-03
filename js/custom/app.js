@@ -13,21 +13,26 @@ window.onload = function(){
         };
     });
     rows.map(row => {
-        let svgs = Array.from(document.querySelectorAll('#' + row.id + ' > svg'));
+        var svgs = Array.from(document.querySelectorAll('#' + row.id + ' > svg'));
         svgs.map(svg => {
             svg.addEventListener('click', evt => {
                 svgs.map(svg => {
                     svg.classList.remove(svg.getAttribute('data-color'));
+                    // svg.setAttribute('data-selected') = false;
+                    console.log(svg);
                 });
                 let item = evt.currentTarget.getAttribute('data-item');
-                console.log('item :', item);
+                let note = evt.currentTarget.getAttribute('data-note');
+                console.log('item selectionné :', item);
+                console.log('notation :', note);
                 evt.currentTarget.classList.add(evt.currentTarget.getAttribute('data-color'));
-                console.log(evt.currentTarget.getAttribute('data-color'));
+                evt.target.dataset.selected = "true";
             });
         });
     });
-        // let svgInObj = document.getElementById('test').contentDocument;
-        // svgInObj.addEventListener('click', e => {
-        //     console.log(e.currentTarget.childNodes[0].getAttribute('data-color'));
-        // });
+    let afficheNotes = function(){
+            let arr = [];
+
+            arr.push()
+    };
 };

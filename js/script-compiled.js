@@ -20,18 +20,23 @@ window.onload = function () {
             svg.addEventListener('click', function (evt) {
                 svgs.map(function (svg) {
                     svg.classList.remove(svg.getAttribute('data-color'));
+                    // svg.setAttribute('data-selected') = false;
+                    console.log(svg);
                 });
                 var item = evt.currentTarget.getAttribute('data-item');
-                console.log('item :', item);
+                var note = evt.currentTarget.getAttribute('data-note');
+                console.log('item selectionné :', item);
+                console.log('notation :', note);
                 evt.currentTarget.classList.add(evt.currentTarget.getAttribute('data-color'));
-                console.log(evt.currentTarget.getAttribute('data-color'));
+                evt.target.dataset.selected = "true";
             });
         });
     });
-    // let svgInObj = document.getElementById('test').contentDocument;
-    // svgInObj.addEventListener('click', e => {
-    //     console.log(e.currentTarget.childNodes[0].getAttribute('data-color'));
-    // });
+    var afficheNotes = function afficheNotes() {
+        var arr = [];
+
+        arr.push();
+    };
 };
 'use strict';
 
