@@ -485,6 +485,10 @@ header .logged .parent-color {
     color: #4281A4;
 }
 
+header .logged .child-color {
+    color: #9CAFB7;
+}
+
 header .log-panel {
     display: flex;
     flex-direction: column;
