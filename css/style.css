@@ -452,7 +452,7 @@ template {
 }
 
 body {
-    background-color: #f7b4b0;
+    background-color: #4281A4;
     width: 100vw;
     font-family: "Work Sans", "Helvetica", sans-serif;
     font-weight: bolder;
@@ -463,59 +463,50 @@ body {
 
 header {
     width: 100vw;
-    height: 100px;
-    background-color: #FE938C;
-    box-shadow: 0 0 10px #FE938C;
+    height: 140px;
+    background-color: #FFA726;
+    box-shadow: 0 0 10px #4A4A4A;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     position: relative;
+    margin-bottom: 10px;
+    color: #333333;
+}
+
+header .subtitle {
+    font-weight: 100;
+    margin: 5px 0;
+}
+
+header .subtitle p {
+    margin: 0;
 }
 
 header .logged {
-    color: white;
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 30px;
+    font-size: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
-header .logged .parent-color {
-    color: #4281A4;
-}
-
-header .logged .child-color {
-    color: #9CAFB7;
-}
-
-header .log-panel {
+header .connected-person {
     display: flex;
     flex-direction: column;
-    align-self: flex-end;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
 }
 
-header .log-panel--item {
-    height: 50px;
-    width: 120px;
-    line-height: 50px;
-    display: block;
-    text-align: center;
-    color: #fbe3e2;
-    text-decoration: none;
-    border-bottom: 1px solid #f7b4b0;
-    border-left: 1px solid #f7b4b0;
-    box-sizing: border-box;
-    background-color: transparent;
-    transition: all 1s ease;
+header .connected-person .fa-user {
+    font-size: 2.8em;
 }
 
-header .log-panel--item:hover {
-    background-color: #f7b4b0;
+header .connected-person .fa-child {
+    font-size: 2.8em;
 }
 
 main {
@@ -525,15 +516,10 @@ main {
     justify-content: center;
 }
 
-main .subtitle {
-    color: white;
-    margin: 5px 0;
-}
-
 main .demo-wrapper {
     width: 80vw;
-    background-color: #fea6a0;
-    box-shadow: 0 0 10px #fea6a0;
+    background-color: #ffab30;
+    box-shadow: 0 0 10px #545454;
     padding: 60px;
     display: flex;
     flex-direction: column;
@@ -552,30 +538,28 @@ main .responsability-row {
 
 main .responsability-text {
     font-size: 3em;
-    color: #fbe3e2;
+    color: #333333;
     flex: 1;
     text-align: center;
 }
 
 main .responsability-smile .svg {
-    fill: #fbe3e2;
-    stroke: #fbe3e2;
+    fill: #333333;
+    stroke: #333333;
     width: 80px;
     cursor: crosshair;
     margin: 0 5px;
+    border-radius: 50%;
 }
 
 main .responsability-smile .svg-good--colored, main .responsability-smile .svg-good:hover {
-    fill: #4faf4f;
-    stroke: #4faf4f;
+    background-color: #4faf4f;
 }
 
 main .responsability-smile .svg-average--colored, main .responsability-smile .svg-average:hover {
-    fill: #ffe800;
-    stroke: #ffe800;
+    background-color: #ffe800;
 }
 
 main .responsability-smile .svg-bad--colored, main .responsability-smile .svg-bad:hover {
-    fill: #F00;
-    stroke: #F00;
+    background-color: #F00;
 }

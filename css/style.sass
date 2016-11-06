@@ -6,7 +6,7 @@
 // Import of colors variables
 @import 'colors.sass'
 $ff: 'Work Sans', 'Helvetica', sans-serif
-$headerHeight: 100px
+$headerHeight: 140px
 
 // globals
 
@@ -26,48 +26,61 @@ header
     width: 100vw
     height: $headerHeight
     background-color: $header
-    box-shadow: 0 0 10px $header
+    box-shadow: 0 0 10px $shadow
     display: flex
-    flex-direction: row
+    flex-direction: column
     align-items: center
-    justify-content: center
+    justify-content: space-around
     position: relative
-
+    margin-bottom: 10px
+    color: #333333
+    .subtitle
+        font-weight: 100
+        margin: 5px 0
+        p
+            margin: 0
     .logged
-        color: white
         position: absolute
-        right: 10px
-        top: 50%
-        transform: translateY(-50%)
-        .parent-color
-            color: $parent
-        .child-color
-            color: $child
-    .log-panel
+        left: 30px
+        font-size: 1em
+        display: flex
+        flex-direction: row
+        align-items: center
+    .connected-person
         display: flex
         flex-direction: column
-        align-self: flex-end
-        position: absolute
-        right: 0
-        top: 50%
-        transform: translateY(-50%)
-
-    .log-panel--item
-        height: $headerHeight / 2
-        width: 120px
-        line-height: $headerHeight / 2
-        display: block
-        text-align: center
-        color: $a
-        text-decoration: none
-        border-bottom: 1px solid $body
-        border-left: 1px solid $body
-        box-sizing: border-box
-        background-color: transparent
-        transition: all 1s ease
-
-        &:hover
-            background-color: $body
+        align-items: center
+        justify-content: center
+        margin: 10px
+        .fa-user
+            font-size: 2.8em
+        .fa-child
+            font-size: 2.8em
+    // .log-panel
+    //     display: flex
+    //     flex-direction: column
+    //     align-self: flex-end
+    //     position: absolute
+    //     right: 0
+    //     top: 50%
+    //     transform: translateY(-50%)
+    //
+    // .log-panel--item
+    //     height: $headerHeight / 2
+    //     width: 120px
+    //     line-height: $headerHeight / 2
+    //     display: block
+    //     text-align: center
+    //     color: $a
+    //     text-decoration: none
+    //     border-bottom: 1px solid $body
+    //     border-left: 1px solid $body
+    //     box-sizing: border-box
+    //     background-color: transparent
+    //     transition: all 1s ease
+    //
+    //     &:hover
+    //         background-color: $body
 
 main
     display: flex
@@ -75,14 +88,10 @@ main
     align-items: center
     justify-content: center
 
-    .subtitle
-        color: white
-        margin: 5px 0
-
     .demo-wrapper
         width: 80vw
-        background-color: lighten($header, 4%)
-        box-shadow: 0 0 10px lighten($header, 4%)
+        background-color: lighten($header, 2%)
+        box-shadow: 0 0 10px lighten($shadow, 4%)
         padding: 60px
         display: flex
         flex-direction: column
@@ -110,21 +119,25 @@ main
             width: 80px
             cursor: crosshair
             margin: 0 5px
+            border-radius: 50%
         .svg-good--colored
-            fill: $green
-            stroke: $green
+            // fill: $green
+            // stroke: $green
+            background-color: $green
         .svg-good
             &:hover
                 @extend .svg-good--colored
         .svg-average--colored
-            fill: $yellow
-            stroke: $yellow
+            // fill: $yellow
+            // stroke: $yellow
+            background-color: $yellow
         .svg-average
             &:hover
                 @extend .svg-average--colored
         .svg-bad--colored
-            fill: $red
-            stroke: $red
+            // fill: $red
+            // stroke: $red
+            background-color: $red
         .svg-bad
             &:hover
                 @extend .svg-bad--colored
