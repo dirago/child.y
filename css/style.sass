@@ -1,6 +1,7 @@
-// @import 'animate'
+// Compilable
+@import 'animate'
 @import 'fonts/Melbourne/style.css'
-@import url('https://fonts.googleapis.com/css?family=Pacifico|Work+Sans')
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900')
 @import 'normalize'
 @import 'mixin'
 // Import of colors variables
@@ -42,6 +43,7 @@ header
     .logged
         position: absolute
         left: 30px
+        top: 30px
         font-size: 1em
         display: flex
         flex-direction: row
@@ -141,3 +143,24 @@ main
         .svg-bad
             &:hover
                 @extend .svg-bad--colored
+    .submit-data
+        border: 1px solid $body
+        background-color: white
+        color: $body
+        padding: 10px
+        box-sizing: border-box
+        cursor: pointer
+        &:hover
+            box-shadow: 0px 0px 10px 0px #4a4a4a
+    .error-message
+        color: red
+        margin: 30px 0
+
+// MATERIAL DESIGN
+
+.content-grid
+    max-width: 100vw
+
+.mdl-cell
+    padding: 20px
+    background-color: #f3f3f3

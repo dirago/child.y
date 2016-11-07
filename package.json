@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "web app to manage childs behavior",
   "scripts": {
-    "build": "babel js/custom --watch --out-file js/script-compiled.js"
+    "build": "babel js/custom --watch --out-dir js/compiled"
   },
   "author": "Raphaël DI RAGO",
   "license": "ISC",
