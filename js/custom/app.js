@@ -87,8 +87,73 @@ submitBtn.addEventListener('click', evt => {
     }
 });
 function addData(data, child, container){
+    let date = new Date();
+    let day = date.toLocaleDateString();
+    container.style.width = "100vw";
+    var recordedDay = data.map( el =>{
+        let note = new Note(day, child.name, el.item, el.note);
+        return note;
+    });
     let childName = document.createElement('h1');
-    childName.innerText = sacha.name;
-    childName.className = "animated fadeIn"
+    childName.innerText = "Semaine de " + child.name;
+    childName.className = "animated fadeInDown"
     container.appendChild(childName);
+    let notes = document.createElement('h2');
+    notes.innerText = "Moyenne du jour";
+    notes.className = "animated fadeIn";
+    container.appendChild(notes);
+    let chart = document.createElement('div');
+    chart.className = "canvas";
+    chart.innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
+    container.appendChild(chart);
+    listenCanvas(recordedDay);
+}
+function listenCanvas(data){
+    var ctx = document.getElementById("myChart");
+    let tidy, obey, courtesy, school, share;
+    data.map( el => {
+        if (el.item === "tidy"){tidy = el.note;};
+        if (el.item === "obey"){obey = el.note;};
+        if (el.item === "courtesy"){courtesy = el.note;};
+        if (el.item === "school"){school = el.note;};
+        if (el.item === "share"){share = el.note;};
+    });
+    console.log(tidy);
+    let myChart = new Chart(ctx, {
+        type: 'polarArea',
+        data: {
+            datasets: [{
+            data: [
+                tidy,
+                obey,
+                courtesy,
+                school,
+                share
+            ],
+            backgroundColor: [
+                "#FF6384",
+                "#4BC0C0",
+                "#FFCE56",
+                "#E7E9ED",
+                "#36A2EB"
+            ]
+        }],
+        labels: [
+            "Ranger",
+            "Obéïr",
+            "Politesse",
+            "Ecole",
+            "Partage"
+        ]
+        },
+        options: {
+            elements: {
+                arc: {
+                    borderColor: "#000000"
+                }
+            },
+            responsive: true,
+            maintainAspectRatio: true
+        }
+    });
 }

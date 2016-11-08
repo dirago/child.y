@@ -83,9 +83,12 @@
 
     <footer>
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js" charset="utf-8"></script>
+    <script src="js/compiled/chart.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/compiled/app.js"></script>
     <script type="text/javascript" src="js/compiled/parent.js"></script>
     <script type="text/javascript" src="js/compiled/child.js"></script>
+    <script src="js/compiled/note.js" charset="utf-8"></script>
 </body>
 
 </html>

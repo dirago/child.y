@@ -8,5 +8,5 @@ class Child {
     }
 };
 
-let sacha = new Child('Sacha');
+const sacha = new Child('Sacha');
 console.log(sacha);

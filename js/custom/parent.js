@@ -5,5 +5,5 @@ class Parent {
     };
 };
 
-let papa = new Parent('Daddy', 'Raphaël');
+const papa = new Parent('Daddy', 'Raphaël');
 console.log(papa);
