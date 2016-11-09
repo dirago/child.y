@@ -12,10 +12,6 @@ var Note = function () {
         this.child = child;
         this.item = item;
         this.note = note;
-
-        // this.combo = [
-        //     {this.item = this.note}
-        // ];
     }
 
     _createClass(Note, [{

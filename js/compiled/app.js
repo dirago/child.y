@@ -121,9 +121,9 @@ function addData(data, child, container) {
     chart.className = "canvas";
     chart.innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
     container.appendChild(chart);
-    listenCanvas(recordedDay);
+    deployChart(recordedDay);
 }
-function listenCanvas(data) {
+function deployChart(data) {
     var ctx = document.getElementById("myChart");
     var tidy = void 0,
         obey = void 0,
@@ -153,7 +153,7 @@ function listenCanvas(data) {
         data: {
             datasets: [{
                 data: [tidy, obey, courtesy, school, share],
-                backgroundColor: ["#FF6384", "#4BC0C0", "#FFCE56", "#E7E9ED", "#36A2EB"]
+                backgroundColor: ["rgba(255,99,99,.5)", "rgba(75,193,193,.5)", "rgba(255,206,85,.5)", "rgba(231,233,237,.5)", "rgba(54,162,235,.5)"]
             }],
             labels: ["Ranger", "Obéïr", "Politesse", "Ecole", "Partage"]
         },
@@ -164,7 +164,12 @@ function listenCanvas(data) {
                 }
             },
             responsive: true,
-            maintainAspectRatio: true
+            maintainAspectRatio: true,
+            ticks: {
+                max: 2,
+                min: 0,
+                stepSize: 0.5
+            }
         }
     });
 }

@@ -4,10 +4,6 @@ class Note {
         this.child = child;
         this.item = item;
         this.note = note;
-
-        // this.combo = [
-        //     {this.item = this.note}
-        // ];
     }
     getDate(){
         return this.date;
