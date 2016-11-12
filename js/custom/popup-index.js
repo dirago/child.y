@@ -16,32 +16,32 @@ loginBtn.addEventListener('click', e => {
     loginPopup.appendChild(form);
 
 
-    containerPopup.addEventListener('click', e => {
-        e.preventDefault();
-        containerPopup.className = "popup animated fadeOut";
-        setTimeout(function(){body.removeChild(containerPopup);}, 2000);
-    });
+    // containerPopup.addEventListener('click', e => {
+    //     e.preventDefault();
+    //     containerPopup.className = "popup animated fadeOut";
+    //     setTimeout(function(){body.removeChild(containerPopup);}, 2000);
+    // });
 });
 
-signin.addEventListener('click', e => {
-    // container popup
-    createPopUp(body, header);
-    // popup
-
-});
+// signin.addEventListener('click', e => {
+//     // container popup
+//     createPopUp(body, header);
+//     // popup
+//
+// });
 
 function createContainerPopUp(parent, nextChild){
-    let createdContainerPopup = document.createElement('div');
-    createdContainerPopup.className = "popup-container animated fadeIn";
-    createdContainerPopup.id = "container-popup";
-    parent.insertBefore(createdContainerPopup, nextChild);
+    let containerPopup = document.createElement('div');
+    containerPopup.className = "popup-container animated fadeIn";
+    containerPopup.id = "container-popup";
+    parent.insertBefore(containerPopup, nextChild);
     var containerPopupElement = document.querySelector('#container-popup');
+    return containerPopupElement;
 }
 function createPopUp(parent){
     var popup = document.createElement('div');
     popup.className = "popup-content animated fadeIn";
     popup.id = "popup";
-    parent.appendChild(loginPopup);
+    parent.appendChild(popup);
     var popupElement = document.querySelector('#popup');
-    return popupElement;
 }
