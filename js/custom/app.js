@@ -89,7 +89,13 @@ submitBtn.addEventListener('click', evt => {
 function addData(data, child, container){
     let date = new Date();
     let day = date.toLocaleDateString();
-    container.style.width = "100vw";
+    window.scroll(0,0);
+    setTimeout(function(){
+        document.querySelector('.subtitle').style.display = "none";
+        container.style.width = "100vw";
+        container.style.margin = "0";
+        container.style.padding = "40px";
+    }, 1000);
     var recordedDay = data.map( el =>{
         let note = new Note(day, child.name, el.item, el.note);
         return note;
@@ -102,11 +108,52 @@ function addData(data, child, container){
     notes.innerText = "Moyenne du jour";
     notes.className = "animated fadeIn";
     container.appendChild(notes);
+    let notesEnregistrees = recordedDay.map((el) => parseInt(el.note));
+    let total = notesEnregistrees.reduce((a,b) => a+b);
+    let moyenne = total / recordedDay.length;
     let chart = document.createElement('div');
-    chart.className = "canvas";
-    chart.innerHTML = '<canvas id="myChart" width="400" height="400"></canvas>';
+    chart.className = "animated fadeIn"
+    chart.style.fontSize = "92px";
+    chart.style.marginBottom = "30px";
+    if (moyenne < 0.5){chart.style.color="red"}
+    else if (moyenne < 1.5){chart.style.color="orange"}
+    else {chart.style.color="green"};
+    chart.innerText = moyenne + " / 2";
     container.appendChild(chart);
-    deployChart(recordedDay);
+    // deployChart(recordedDay);
+    let progressBarTitle = document.createElement('h2');
+    progressBarTitle.innerText = "Progression du but fixé";
+    progressBarTitle.className = "animated fadeIn"
+    container.appendChild(progressBarTitle);
+    let progressBar = document.createElement('div');
+    progressBar.className = "animated fadeIn progress-wrap progress";
+    progressBar.setAttribute('percent', '10');
+    progressBar.innerHTML = '<div class="progress-bar progress"></div>';
+    container.appendChild(progressBar);
+    show();
+}
+function show(){
+    // on page load...
+    moveProgressBar();
+    // on browser resize...
+    // $(window).resize(function() {
+    //     moveProgressBar();
+    // });
+};
+// SIGNATURE PROGRESS
+function moveProgressBar() {
+  console.log("moveProgressBar");
+    var getPercent = (document.querySelector('.progress-wrap').getAttribute('percent') / 100);
+    console.log(document.querySelector('.progress-wrap').getAttribute('percent'));
+    var getProgressWrapWidth = $('.progress-wrap').width();
+    var progressTotal = getPercent * getProgressWrapWidth;
+    var animationLength = 2500;
+
+    // on page load, animate percentage bar to data percentage length
+    // .stop() used to prevent animation queueing
+    $('.progress-bar').stop().animate({
+        left: progressTotal
+    }, animationLength);
 }
 function deployChart(data){
     var ctx = document.getElementById("myChart");
@@ -118,9 +165,8 @@ function deployChart(data){
         if (el.item === "school"){school = el.note;};
         if (el.item === "share"){share = el.note;};
     });
-    console.log(tidy);
     let myChart = new Chart(ctx, {
-        type: 'polarArea',
+        type: 'bar',
         data: {
             datasets: [{
             data: [
@@ -131,7 +177,7 @@ function deployChart(data){
                 share
             ],
             backgroundColor: [
-                "rgba(255,99,99,.5)",
+                "rgba(255,99,99,.9)",
                 "rgba(75,193,193,.5)",
                 "rgba(255,206,85,.5)",
                 "rgba(231,233,237,.5)",
@@ -155,7 +201,7 @@ function deployChart(data){
             responsive: true,
             maintainAspectRatio: true,
             ticks: {
-                max: 2,
+                max: 3,
                 min: 0,
                 stepSize: 0.5
             }

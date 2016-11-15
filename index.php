@@ -18,6 +18,7 @@
     <title>Child.y | Assistant parental journalier</title>
     <link rel="stylesheet" href="css/style.min.css">
     <script src="https://use.fontawesome.com/982a8f46ca.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -45,7 +46,11 @@
 
     <main>
         <section class="demo-wrapper">
-            <article class="responsability-row">
+            <article class="date">
+                <aside class="date-element"></aside>
+            </article>
+            <article id="first-row" class="responsability-row">
+                <script src="js/compiled/date.js" charset="utf-8"></script>
                 <aside class="responsability-text">Je range</aside>
                 <aside class="responsability-smile">
                     <?php include_once 'src/svg_tidy.php' ?>
