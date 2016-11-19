@@ -9,13 +9,29 @@ var Child = function () {
         _classCallCheck(this, Child);
 
         this.name = name;
+        this.day;
     }
 
     _createClass(Child, [{
-        key: 'addDataDay',
-        value: function addDataDay(data, day) {
-            this.data = data;
-            this.day = day;
+        key: 'setNote',
+        value: function setNote(data, day) {
+            this.day = {
+                'day': day,
+                'notes': data
+            };
+            var req = new XMLHttpRequest();
+            req.onload = function () {
+                console.log(this.responseText);
+            };
+            req.open('POST', '../../add_data.php', true);
+            var form = new FormData();
+            form.append('test', 'test');
+            req.send(form);
+        }
+    }, {
+        key: 'checkData',
+        value: function checkData(day) {
+            this;
         }
     }]);
 
@@ -23,6 +39,3 @@ var Child = function () {
 }();
 
 ;
-
-var sacha = new Child('Sacha');
-console.log(sacha);

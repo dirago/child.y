@@ -54,36 +54,21 @@ header
         flex-direction: column
         align-items: center
         justify-content: center
-        margin: 10px
-        .fa-user
+        margin: 20px
+        .fa
+            margin-bottom: 10px
+        .fa-users
             font-size: 2.8em
         .fa-child
             font-size: 2.8em
-    // .log-panel
-    //     display: flex
-    //     flex-direction: column
-    //     align-self: flex-end
-    //     position: absolute
-    //     right: 0
-    //     top: 50%
-    //     transform: translateY(-50%)
-    //
-    // .log-panel--item
-    //     height: $headerHeight / 2
-    //     width: 120px
-    //     line-height: $headerHeight / 2
-    //     display: block
-    //     text-align: center
-    //     color: $a
-    //     text-decoration: none
-    //     border-bottom: 1px solid $body
-    //     border-left: 1px solid $body
-    //     box-sizing: border-box
-    //     background-color: transparent
-    //     transition: all 1s ease
-    //
-    //     &:hover
-    //         background-color: $body
+    .disconnect
+        position: absolute
+        top: 10px
+        right: 10px
+        color: black
+        text-decoration: none
+        &:hover
+            color: red
 
 main
     display: flex
@@ -113,6 +98,7 @@ main
         box-shadow: 0 0 2px 0 $header
         position: absolute
         top: -20px
+        left: 40px
         .date-element
             display: flex
             align-items: center

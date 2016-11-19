@@ -1,4 +1,9 @@
-
+let relativeName = document.querySelector('#relative').innerText;
+let childFirstname = document.querySelector('#child').innerText;
+const child = new Child(childFirstname);
+console.log(child);
+const family = new Family(relativeName);
+console.log(family);
 // I want to isolate each line of smileys so will be independent
 var rows = Array.from(document.getElementsByClassName('responsability-smile')),
     rowId = 0,
@@ -25,8 +30,6 @@ rows.map(row => {
             });
             let item = evt.currentTarget.getAttribute('data-item');
             let note = evt.currentTarget.getAttribute('data-note');
-            // console.log('item selectionné :', item);
-            // console.log('notation :', note);
             evt.currentTarget.classList.add(evt.currentTarget.getAttribute('data-color'));
             evt.currentTarget.setAttribute('data-selected', true);
             setNotes();
@@ -62,6 +65,7 @@ function setNotes(){
     });
     return recordedData;
 };
+// Validation des notes
 submitBtn.addEventListener('click', evt => {
     let parent = evt.target.parentNode,
         errorElt = document.querySelector('#error');
@@ -81,9 +85,17 @@ submitBtn.addEventListener('click', evt => {
         parent.appendChild(error);
     } else {
         let childs = Array.from(parent.childNodes);
-        childs.map(el => {el.className += " animated fadeOut";});
-        setTimeout(function(){childs.map(child =>{parent.removeChild(child)})},1000);
-        setTimeout(function(){addData(recordedData, sacha, parent)}, 1000);
+        childs.map(el => {
+            el.className += " animated fadeOut";
+        });
+        setTimeout(function(){
+            childs.map(child =>{
+                parent.removeChild(child)
+            })
+        },1000);
+        setTimeout(function(){
+            addData(recordedData, child, parent)
+        }, 1000);
     }
 });
 function addData(data, child, container){
@@ -100,57 +112,63 @@ function addData(data, child, container){
         let note = new Note(day, child.name, el.item, el.note);
         return note;
     });
-    let childName = document.createElement('h1');
-    childName.innerText = "Semaine de " + child.name;
-    childName.className = "animated fadeInDown"
-    container.appendChild(childName);
-    let notes = document.createElement('h2');
-    notes.innerText = "Moyenne du jour";
-    notes.className = "animated fadeIn";
-    container.appendChild(notes);
-    let notesEnregistrees = recordedDay.map((el) => parseInt(el.note));
-    let total = notesEnregistrees.reduce((a,b) => a+b);
-    let moyenne = total / recordedDay.length;
-    let chart = document.createElement('div');
-    chart.className = "animated fadeIn"
-    chart.style.fontSize = "92px";
-    chart.style.marginBottom = "30px";
-    if (moyenne < 0.5){chart.style.color="red"}
-    else if (moyenne < 1.5){chart.style.color="orange"}
-    else {chart.style.color="green"};
-    chart.innerText = moyenne + " / 2";
-    container.appendChild(chart);
-    // deployChart(recordedDay);
-    let progressBarTitle = document.createElement('h2');
+    let childTitle = document.createElement('h1');
+    childTitle.innerText = "Semaine de " + child.name;
+    childTitle.className = "animated fadeInDown"
+    container.appendChild(childTitle);
+    launchWeek(container, recordedDay, day, child);
+    // let notes = document.createElement('h2');
+    // notes.innerText = "Moyenne du jour";
+    // notes.className = "animated fadeIn";
+    // container.appendChild(notes);
+    // let notesEnregistrees = recordedDay.map((el) => parseInt(el.note));
+    // let total = notesEnregistrees.reduce((a,b) => a+b);
+    // let moyenne = total / recordedDay.length;
+    // // Création de la progress bar
+    // let chart = document.createElement('div');
+    // chart.className = "animated fadeIn"
+    // chart.style.fontSize = "92px";
+    // chart.style.marginBottom = "30px";
+    // if (moyenne < 0.5){chart.style.color="red"}
+    // else if (moyenne < 1.5){chart.style.color="orange"}
+    // else {chart.style.color="green"};
+    // chart.innerText = moyenne + " / 2";
+    // container.appendChild(chart);
+    // let percent = moyenne * 10;
+    // console.log(percent);
+    // setProgressBarElement(container, percent);
+}
+
+
+
+function launchWeek(container, data, day, child){
+    let note = child.setNote(data, day);
+    console.log(note);
+    data.map(e => console.log(e));
+}
+
+
+
+
+function setProgressBarElement(container, percent){
+    var progressBarTitle = document.createElement('h2');
     progressBarTitle.innerText = "Progression du but fixé";
     progressBarTitle.className = "animated fadeIn"
     container.appendChild(progressBarTitle);
-    let progressBar = document.createElement('div');
+    var progressBar = document.createElement('div');
     progressBar.className = "animated fadeIn progress-wrap progress";
-    progressBar.setAttribute('percent', '10');
+    progressBar.setAttribute('percent', percent);
     progressBar.innerHTML = '<div class="progress-bar progress"></div>';
     container.appendChild(progressBar);
-    show();
+    moveProgressBar(progressBar);
 }
-function show(){
-    // on page load...
-    moveProgressBar();
-    // on browser resize...
-    // $(window).resize(function() {
-    //     moveProgressBar();
-    // });
-};
 // SIGNATURE PROGRESS
-function moveProgressBar() {
-  console.log("moveProgressBar");
-    var getPercent = (document.querySelector('.progress-wrap').getAttribute('percent') / 100);
-    console.log(document.querySelector('.progress-wrap').getAttribute('percent'));
-    var getProgressWrapWidth = $('.progress-wrap').width();
+function moveProgressBar(bar) {
+    var getPercent = (bar.getAttribute('percent') / 100);
+    console.log(bar.getAttribute('percent'));
+    var getProgressWrapWidth = bar.width();
     var progressTotal = getPercent * getProgressWrapWidth;
     var animationLength = 2500;
-
-    // on page load, animate percentage bar to data percentage length
-    // .stop() used to prevent animation queueing
     $('.progress-bar').stop().animate({
         left: progressTotal
     }, animationLength);
@@ -164,47 +182,5 @@ function deployChart(data){
         if (el.item === "courtesy"){courtesy = el.note;};
         if (el.item === "school"){school = el.note;};
         if (el.item === "share"){share = el.note;};
-    });
-    let myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            datasets: [{
-            data: [
-                tidy,
-                obey,
-                courtesy,
-                school,
-                share
-            ],
-            backgroundColor: [
-                "rgba(255,99,99,.9)",
-                "rgba(75,193,193,.5)",
-                "rgba(255,206,85,.5)",
-                "rgba(231,233,237,.5)",
-                "rgba(54,162,235,.5)"
-            ]
-        }],
-        labels: [
-            "Ranger",
-            "Obéïr",
-            "Politesse",
-            "Ecole",
-            "Partage"
-        ]
-        },
-        options: {
-            elements: {
-                arc: {
-                    borderColor: "#000000"
-                }
-            },
-            responsive: true,
-            maintainAspectRatio: true,
-            ticks: {
-                max: 3,
-                min: 0,
-                stepSize: 0.5
-            }
-        }
     });
 }
