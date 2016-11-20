@@ -1,10 +1,10 @@
 <?php
 // Mes infos DB
-$host='localhost';
-$port='8889';
-$db_name='childy;charset=utf8';
-$user='root';
-$pw='root';
+$host='mysql.hostinger.fr';
+$port='';
+$db_name='chldy;charset=utf8';
+$user='admin';
+$pw='childy';
 
 try {
     // on ouvre une connexion à la base de données
