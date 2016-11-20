@@ -7,6 +7,8 @@
 // Import of colors variables
 @import 'colors.sass'
 $ff: 'Work Sans', 'Helvetica', sans-serif
+$phone: "only screen and (max-width : 600px)"
+$tab: "only screen and (max-width : 1000px)"
 
 input,
 textarea
@@ -54,6 +56,9 @@ a
         justify-content: center
         padding: 20px
         overflow-y: scroll
+        @media #{$tab}
+            width: 100vw
+            height: auto
     .btn-close
         position: absolute
         top: 20px
@@ -73,11 +78,16 @@ a
         color: white
         &:focus
             box-shadow: 1px 10px 21px -13px white
+        @media #{$tab}
+            border: 1px solid white
     .form-row
         display: flex
         flex-direction: row
         align-items: flex-end
         position: relative
+        @media #{$tab}
+            flex-direction: column
+            align-items: flex-start
         h3
             margin: 40px 0 0 20px
         p.plus
@@ -90,6 +100,11 @@ a
             border-radius: 50%
             width: 1.17em
             text-align: center
+            @media #{$tab}
+                position: absolute
+                bottom: 0
+                left: -10px
+                margin-left: 0
     .form-signIn
 header
     width: 100%
@@ -105,17 +120,36 @@ header
     align-items: flex-start
     justify-content: space-between
     box-sizing: border-box
+    @media #{$tab}
+        flex-direction: column
+        align-items: center
+        justify-content: flex-start
+    .logo
+        @media #{$tab}
+            text-align: center
     .logo-subtitle
         h3
             margin-top: 10px
             font-weight: 100
+            @media #{$tab}
+                display: none
     .log
         display: flex
         flex-direction: row
         font-weight: 100
+        @media #{$tab}
+            font-weight: 500
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
         a
             margin: 10px
             padding: 5px
             cursor: pointer
             &:hover
                 border-bottom: 1px solid white
+            @media #{$tab}
+                border: 1px solid white
+                padding: 10px
+                background-color: rgba(0, 0, 0, 0.4)
