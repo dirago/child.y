@@ -12,7 +12,7 @@ switch (jourSemaine) {
     case 4: dateJour.innerText = "Jeudi"; break;
     case 5: dateJour.innerText = "Vendredi"; break;
     case 6: dateJour.innerText = "Samedi"; break;
-    case 7: dateJour.innerText = "Dimanche"; break;
+    case 0: dateJour.innerText = "Dimanche"; break;
     default: dateJour.innerText = "Erreur";
 }
 dateJour.innerText += ' ' + nombre;

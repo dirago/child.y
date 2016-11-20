@@ -1,15 +1,23 @@
-let relativeName = document.querySelector('#relative').innerText;
-let childFirstname = document.querySelector('#child').innerText;
-const child = new Child(childFirstname);
-console.log(child);
-const family = new Family(relativeName);
-console.log(family);
-// I want to isolate each line of smileys so will be independent
 var rows = Array.from(document.getElementsByClassName('responsability-smile')),
     rowId = 0,
     recordedData = new Array(),
     submitBtn = document.querySelector('#submit-btn'),
-    main = document.querySelector('main')[0];
+    selectChoiceInput = document.querySelector('#selectChild'),
+    main = document.querySelector('main')[0],
+    date = new Date(),
+    day = date.toLocaleDateString(),
+    dayISO = toISODate(date);
+// Je crée la variable "famille" puis la/les variable/s enfant/s dynamiquement
+var relativeName = document.querySelector('#relative').innerText;
+const family = new Family(relativeName);
+var child = new Child();
+console.log(family);
+selectChoiceInput.addEventListener('change', e => {
+    if (e.target.value != "nochoice"){
+        child.name = e.target.value;
+        console.log(child);
+    }
+});
 // I create IDs for each generated line of smiles
 rows.map(el => {
     if (el.id != null){
@@ -69,62 +77,80 @@ function setNotes(){
 submitBtn.addEventListener('click', evt => {
     let parent = evt.target.parentNode,
         errorElt = document.querySelector('#error');
-    if (recordedData.length === rows.length - 1){
+    if (selectChild.value === "nochoice") {
         if (errorElt !== null){parent.removeChild(errorElt);}
         let error = document.createElement('span');
         error.id = "error";
         error.className = "error-message";
-        error.innerText = "Il manque une note !";
-        parent.appendChild(error);
-    } else if (recordedData.length < rows.length) {
-        if (errorElt !== null){parent.removeChild(errorElt);}
-        let error = document.createElement('span');
-        error.id = "error";
-        error.className = "error-message";
-        error.innerText = "Il manque plusieurs notes !";
+        error.innerText = "Vous devez choisir l'enfant à noter !";
         parent.appendChild(error);
     } else {
-        let childs = Array.from(parent.childNodes);
-        childs.map(el => {
-            el.className += " animated fadeOut";
-        });
-        setTimeout(function(){
-            childs.map(child =>{
-                parent.removeChild(child)
-            })
-        },1000);
-        setTimeout(function(){
-            addData(recordedData, child, parent)
-        }, 1000);
+        if (recordedData.length === rows.length - 1){
+            if (errorElt !== null){parent.removeChild(errorElt);}
+            let error = document.createElement('span');
+            error.id = "error";
+            error.className = "error-message";
+            error.innerText = "Il manque une note !";
+            parent.appendChild(error);
+        } else if (recordedData.length < rows.length) {
+            if (errorElt !== null){parent.removeChild(errorElt);}
+            let error = document.createElement('span');
+            error.id = "error";
+            error.className = "error-message";
+            error.innerText = "Il manque plusieurs notes !";
+            parent.appendChild(error);
+        } else {
+            let childs = Array.from(parent.childNodes);
+            childs.map(el => {
+                el.className += " animated fadeOut";
+            });
+            setTimeout(function(){
+                childs.map(child =>{
+                    parent.removeChild(child)
+                })
+            },1000);
+            setTimeout(function(){
+                addData(recordedData, child, parent, day)
+            }, 1000);
+        }
     }
 });
-function addData(data, child, container){
-    let date = new Date();
-    let day = date.toLocaleDateString();
+function addData(data, child, container, day){
     window.scroll(0,0);
-    setTimeout(function(){
-        document.querySelector('.subtitle').style.display = "none";
-        container.style.width = "100vw";
-        container.style.margin = "0";
-        container.style.padding = "40px";
-    }, 1000);
+    document.querySelector('.subtitle').className = "hide";
+    container.style.padding = "0";
+    container.style.margin = "0";
+    container.style.width = "100vw";
+    if ($(window).width() > 1000){
+        container.style.height = "calc(100vh - 120px)";
+        container.style.flexDirection = "row";
+    } else {
+        container.style.height = "1000px";
+    }
     var recordedDay = data.map( el =>{
         let note = new Note(day, child.name, el.item, el.note);
         return note;
     });
-    let childTitle = document.createElement('h1');
-    childTitle.innerText = "Semaine de " + child.name;
-    childTitle.className = "animated fadeInDown"
-    container.appendChild(childTitle);
-    launchWeek(container, recordedDay, day, child);
-    // let notes = document.createElement('h2');
-    // notes.innerText = "Moyenne du jour";
-    // notes.className = "animated fadeIn";
-    // container.appendChild(notes);
-    // let notesEnregistrees = recordedDay.map((el) => parseInt(el.note));
-    // let total = notesEnregistrees.reduce((a,b) => a+b);
-    // let moyenne = total / recordedDay.length;
-    // // Création de la progress bar
+    let notesEnregistrees = recordedDay.map((el) => parseInt(el.note));
+    let total = notesEnregistrees.reduce((a,b) => a+b);
+    let moyenne = total / recordedDay.length;
+    console.log('total :', total);
+    console.log('moyenne :', moyenne);
+    let percent = (moyenne * 10) + 27;
+    let percent2 = (moyenne * 10) + 48;
+    setTimeout(function(){
+        let calendar = document.createElement('div');
+        calendar.id = "calendar";
+        container.appendChild(calendar);
+        let divBar = document.createElement('div');
+        divBar.className = "col";
+        container.appendChild(divBar)
+        deployCalendar(moyenne);
+        setProgressBarElement(divBar, percent, percent2);
+    }, 2000);
+    // launchWeek(container, recordedDay, day, child);
+
+    // Création de la progress bar
     // let chart = document.createElement('div');
     // chart.className = "animated fadeIn"
     // chart.style.fontSize = "92px";
@@ -134,44 +160,95 @@ function addData(data, child, container){
     // else {chart.style.color="green"};
     // chart.innerText = moyenne + " / 2";
     // container.appendChild(chart);
-    // let percent = moyenne * 10;
-    // console.log(percent);
-    // setProgressBarElement(container, percent);
+
 }
 
+function deployCalendar(m){
+    var calendar = new Calendar('#calendar');
+    let nbs = Array.from(document.querySelectorAll('.day-number'));
+    let weekToHide = document.querySelector('.month').children[0];
+    weekToHide.className = "hide";
+    for (let i = 0; i < 31; i++) {
+        if (nbs[i].innerText == new Date().getDate()) {
+            if (m < 0.2) {
+                nbs[i].className = "day-number day-number--red strong";
+                return;
+            } else if (m < 1.5) {
+                nbs[i].className = "day-number day-number--orange strong";
+                return;
+            } else {
+                nbs[i].className = "day-number day-number--green strong";
+                return;
+            }
 
+        }
+        if (nbs[i].innerText < new Date().getDate()) {
+            let random = Math.floor(Math.random() * (3) + 1)
+            switch (random){
+                case 1: nbs[i].className = "day-number day-number--orange"; break;
+                case 2: nbs[i].className = "day-number day-number--red"; break;
+                case 3: nbs[i].className = "day-number day-number--green"; break;
+                default: "error";
+            }
+        }
+    }
+}
 
 function launchWeek(container, data, day, child){
-    let note = child.setNote(data, day);
-    console.log(note);
+    child.setNote(data, day);
     data.map(e => console.log(e));
 }
 
 
 
 
-function setProgressBarElement(container, percent){
+function setProgressBarElement(container, percent, percent2){
+    let name = document.createElement('h1');
+    name.innerText = "Bilan de " + child.name;
+    name.style.margin = "0 0 30px 0";
+    container.appendChild(name);
     var progressBarTitle = document.createElement('h2');
-    progressBarTitle.innerText = "Progression du but fixé";
-    progressBarTitle.className = "animated fadeIn"
+    progressBarTitle.innerText = "Gagner un cadeau";
+    progressBarTitle.className = "animated fadeIn start"
     container.appendChild(progressBarTitle);
     var progressBar = document.createElement('div');
     progressBar.className = "animated fadeIn progress-wrap progress";
     progressBar.setAttribute('percent', percent);
-    progressBar.innerHTML = '<div class="progress-bar progress"></div>';
+    progressBar.innerHTML = '<div class="progress-bar progress">'+percent+' %</div>';
     container.appendChild(progressBar);
-    moveProgressBar(progressBar);
+    var getPercent = (progressBar.getAttribute('percent') / 100);
+    console.log(progressBar.getAttribute('percent'));
+    var getProgressWrapWidth = $('.progress-bar').width();
+    var progressTotal = (getPercent * getProgressWrapWidth);
+    var animationLength = 1500;
+    $('.progress-bar').stop().animate({
+        left: progressTotal
+
+    }, animationLength);
+
+
+    var progressBarTitle2 = document.createElement('h2');
+    progressBarTitle2.innerText = "Gagner une responsabilité";
+    progressBarTitle2.className = "animated fadeIn start"
+    container.appendChild(progressBarTitle2);
+    var progressBar2 = document.createElement('div');
+    progressBar2.className = "animated fadeIn progress-wrap2 progress";
+    progressBar2.setAttribute('percent', percent2);
+    progressBar2.innerHTML = '<div class="progress-bar2 progress">'+percent2+' %</div>';
+    container.appendChild(progressBar2);
+    var getPercent2 = (progressBar2.getAttribute('percent') / 100);
+    console.log(progressBar2.getAttribute('percent'));
+    var getProgressWrapWidth2 = $('.progress-bar2').width();
+    var progressTotal2 = (getPercent2 * getProgressWrapWidth2);
+    var animationLength2 = 2000;
+    $('.progress-bar2').stop().animate({
+        left: progressTotal2
+
+    }, animationLength2);
 }
 // SIGNATURE PROGRESS
 function moveProgressBar(bar) {
-    var getPercent = (bar.getAttribute('percent') / 100);
-    console.log(bar.getAttribute('percent'));
-    var getProgressWrapWidth = bar.width();
-    var progressTotal = getPercent * getProgressWrapWidth;
-    var animationLength = 2500;
-    $('.progress-bar').stop().animate({
-        left: progressTotal
-    }, animationLength);
+
 }
 function deployChart(data){
     var ctx = document.getElementById("myChart");
@@ -183,4 +260,8 @@ function deployChart(data){
         if (el.item === "school"){school = el.note;};
         if (el.item === "share"){share = el.note;};
     });
+}
+
+function toISODate(date){
+    return date.toISOString().split('T')[0];
 }
