@@ -1,5 +1,9 @@
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var rows = Array.from(document.getElementsByClassName('responsability-smile')),
     rowId = 0,
     recordedData = new Array(),
@@ -222,46 +226,13 @@ function setProgressBarElement(container, percent, percent2) {
     name.innerText = "Bilan de " + child.name;
     name.style.margin = "0 0 30px 0";
     container.appendChild(name);
-    var progressBarTitle = document.createElement('h2');
-    progressBarTitle.innerText = "Gagner un cadeau";
-    progressBarTitle.className = "animated fadeIn start";
-    container.appendChild(progressBarTitle);
-    var progressBar = document.createElement('div');
-    progressBar.className = "animated fadeIn progress-wrap progress";
-    progressBar.setAttribute('percent', percent);
-    progressBar.innerHTML = '<div class="progress-bar progress">' + percent + ' %</div>';
-    container.appendChild(progressBar);
-    var getPercent = progressBar.getAttribute('percent') / 100;
-    console.log(progressBar.getAttribute('percent'));
-    var getProgressWrapWidth = $('.progress-bar').width();
-    var progressTotal = getPercent * getProgressWrapWidth;
-    var animationLength = 1500;
-    $('.progress-bar').stop().animate({
-        left: progressTotal
 
-    }, animationLength);
-
-    var progressBarTitle2 = document.createElement('h2');
-    progressBarTitle2.innerText = "Gagner une responsabilité";
-    progressBarTitle2.className = "animated fadeIn start";
-    container.appendChild(progressBarTitle2);
-    var progressBar2 = document.createElement('div');
-    progressBar2.className = "animated fadeIn progress-wrap2 progress";
-    progressBar2.setAttribute('percent', percent2);
-    progressBar2.innerHTML = '<div class="progress-bar2 progress">' + percent2 + ' %</div>';
-    container.appendChild(progressBar2);
-    var getPercent2 = progressBar2.getAttribute('percent') / 100;
-    console.log(progressBar2.getAttribute('percent'));
-    var getProgressWrapWidth2 = $('.progress-bar2').width();
-    var progressTotal2 = getPercent2 * getProgressWrapWidth2;
-    var animationLength2 = 2000;
-    $('.progress-bar2').stop().animate({
-        left: progressTotal2
-
-    }, animationLength2);
+    var bar = new ProgressBar(percent, "Gagner un cadeau", "progress-wrap", "progress-bar");
+    bar.render(container, 1500);
+    var bar2 = new ProgressBar(percent2, "Gagner une responsabilité", "progress-wrap2", "progress-bar2");
+    bar2.render(container, 2000);
 }
-// SIGNATURE PROGRESS
-function moveProgressBar(bar) {}
+
 function deployChart(data) {
     var ctx = document.getElementById("myChart");
     var tidy = void 0,
@@ -291,3 +262,37 @@ function deployChart(data) {
 function toISODate(date) {
     return date.toISOString().split('T')[0];
 }
+
+var ProgressBar = function () {
+    function ProgressBar(percent, text, wrapClass, barClass) {
+        _classCallCheck(this, ProgressBar);
+
+        this.percent = percent;
+        this.wrapClass = wrapClass;
+        this.barClass = barClass;
+        this.title = document.createElement('h2');
+        this.title.innerText = text;
+        this.title.className = "animated fadeIn start";
+        this.bar = document.createElement('div');
+        this.bar.setAttribute('percent', percent);
+        this.bar.className = "animated fadeIn " + this.wrapClass + " progress";
+        this.bar.innerHTML = '<div class="' + this.barClass + ' progress">' + percent + ' %</div>';
+    }
+
+    _createClass(ProgressBar, [{
+        key: 'render',
+        value: function render(container, animationLength) {
+            container.appendChild(this.title);
+            container.appendChild(this.bar);
+            var getPercent = this.bar.getAttribute('percent') / 100;
+            console.log(this.bar.getAttribute('percent'));
+            var getProgressWrapWidth = $('.' + this.barClass).width();
+            var progressTotal = getPercent * getProgressWrapWidth;
+            $('.' + this.barClass).stop().animate({
+                left: progressTotal
+            }, animationLength);
+        }
+    }]);
+
+    return ProgressBar;
+}();
